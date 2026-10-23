@@ -1,0 +1,17 @@
+# macOS metadata
+.DS_Store
+
+# Maven build output
+target/
+
+# Local IDE configuration
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# Local environment configuration; keep the documented template
+.env
+.env.*
+!.env.example

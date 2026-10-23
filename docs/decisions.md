@@ -1,0 +1,49 @@
+# Decision record
+
+Prepared 2026-10-23. This is a compact implementation brief, not a claim of deployed behavior.
+
+## Preserved from the earlier design
+
+- One club, not multi-tenant SaaS; owner/trainer/member roles may overlap.
+- Open class groups with recommended proficiency, individually dated sessions and one lead trainer/room.
+- Entry-limited calendar-month passes, PLN examples 220/8 and 260/12.
+- Price/entitlement snapshots, activation after successful payment, explicit pass selection for booking.
+- Reservation holds an entry; attendance/no-show/late cancellation consumes it; club cancellation releases it.
+- Transactions, real database constraints and retained history rather than counters maintained in parallel.
+
+## Confirmed project name
+
+The user selected **Spring Boot Boxing Academy API** and repository name `spring-boot-boxing-academy-api`. This naming decision is confirmed; the business-policy defaults below remain recommendations.
+
+## Defaults selected for this handoff
+
+These are deliberate recommendations to make V1 implementable. They were not all previously explicit user decisions. They may be revised before affected implementation; keep the specification and tests consistent if changed.
+
+| Decision | Reason / consequence |
+|---|---|
+| Spring Boot Boxing Academy API | User-selected descriptive name; repository slug `spring-boot-boxing-academy-api`. Technology and domain are explicit without a separate product brand. |
+| Single-module modular monolith | Demonstrates normal backend work without deployment/distribution overhead. |
+| Java 25, Boot 4.1.x, PostgreSQL 18 | Concrete compatible baseline; pin stable patch versions at scaffolding and recheck compatibility. |
+| Cookie/session authentication | Fits a future same-origin web UI without custom refresh tokens; requires CSRF and session handling. |
+| Owner-created accounts in V1 | Registration is available to club staff; public signup/email recovery is a separate complete workflow, not an unfinished stub. |
+| Manual receipts only | Gives the membership lifecycle a real executable flow without claiming to process money. V1 has one receipt per pass; online payments would require a new attempt/reconciliation model. |
+| Two-hour free cancellation cutoff | Clear testable default. Store the actual deadline on the session so future changes do not rewrite history. |
+| Attendance after session end | One simple rule for both attendance states; avoids modifying occupancy during an active class. |
+| No reschedule/capacity edits | Cancel/recreate provides a correct bounded alternative to complicated revalidation of existing bookings/pass coverage. |
+| No member overlap restriction | Not needed for capacity/entry correctness; documented so agents do not invent additional rejection rules. |
+| No refunds or active-pass revocation | Avoids inconsistent financial/booking corrections until that workflow is explicitly designed. |
+| PostgreSQL exclusion constraints now | Overlap correctness under concurrency is part of scheduling, not an optional later polish. |
+| No persisted balance counters | The small data volume supports aggregate reads under locks; one clear source of truth. |
+| Plain DTO mappings, no service interfaces by default | Fewer layers; framework interfaces remain appropriate. |
+
+## Clarifications to the original broad schema
+
+The historical proposal included ONLINE/PENDING/FAILED payment attempts, provider identifiers, refunds, revoked passes, email verification and webhook event tables. None of those is silently required by V1. The canonical database document and V1 diagrams remove the associated fields/tables/states.
+
+The original model allowed ATTENDED after a session starts and contemplated changes to unbooked sessions. V1 deliberately narrows these to attendance after the end and no rescheduling endpoint. This reduces edge cases while preserving the core club workflow.
+
+## Change discipline
+
+No new decision is needed for a local variable name, a small mapper or a routine test. Update this file when a decision materially changes scope, business policy, authorization, persistence or compatibility. Do not build an ADR framework or require approval for harmless implementation details.
+
+There are no unresolved questions blocking the first implementation slice. Before introducing real users, online payments, multi-club operation or broader schedule edits, define the corresponding product and operational rules instead of assuming V1 already supports them.
