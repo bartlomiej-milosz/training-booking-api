@@ -18,3 +18,6 @@ target/
 
 # Draw.io backup files
 docs/diagrams/.$boxing-academy.drawio.bkp
+
+# Local VS Code configuration
+.vscode/
