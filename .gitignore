@@ -15,3 +15,6 @@ target/
 .env
 .env.*
 !.env.example
+
+# Draw.io backup files
+docs/diagrams/.$boxing-academy.drawio.bkp
