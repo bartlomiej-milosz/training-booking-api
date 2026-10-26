@@ -1,6 +1,6 @@
-<mxfile host="Electron">
+<mxfile host="Electron" pages="4">
   <diagram name="diagram" id="ncd9caLHSEICZz9X4NYb">
-    <mxGraphModel dx="2600" dy="1523" grid="1" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2657" dy="1491" grid="0" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="fMsy5MYX-ujzHFYTszXY-0" />
         <mxCell id="fMsy5MYX-ujzHFYTszXY-1" parent="fMsy5MYX-ujzHFYTszXY-0" />
@@ -1802,6 +1802,234 @@
         </mxCell>
         <mxCell id="legend-relations" parent="legend-complete" style="html=1;whiteSpace=wrap;rounded=0;text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacing=0;fontFamily=JetBrains Mono;fontSize=12;fontSize=12;fontStyle=0;" value="1 = one  |  N = many  |  0..1 = zero or one" vertex="1">
           <mxGeometry height="24" width="640" x="20" y="308" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="docker-port-mapping-explained" name="docker-postgres-mapping">
+    <mxGraphModel grid="0" page="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1400" pageHeight="1000" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=30;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#0F172A;" value="&lt;b&gt;From your Mac to PostgreSQL&lt;/b&gt;" vertex="1">
+          <mxGeometry height="45" width="1300" x="50" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=22;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#475569;" value="Learning example: Compose mapping &lt;b&gt;127.0.0.1:5433:5432&lt;/b&gt;" vertex="1">
+          <mxGeometry height="35" width="1300" x="50" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="host-boundary" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#F8FAFC;strokeColor=#94A3B8;strokeWidth=2;spacing=14;" value="" vertex="1">
+          <mxGeometry height="490" width="1320" x="40" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="host-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=23;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#0F172A;" value="&lt;b&gt;MacBook / macOS — the host computer&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="800" x="65" y="167" as="geometry" />
+        </mxCell>
+        <mxCell id="host-note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=17;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#475569;" value="Spring runs directly on the Mac. The container has its own network context." vertex="1">
+          <mxGeometry height="40" width="950" x="65" y="213" as="geometry" />
+        </mxCell>
+        <mxCell id="container-boundary" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#FFF7ED;strokeColor=#F59E0B;strokeWidth=2;spacing=14;dashed=1;dashPattern=6 4;" value="" vertex="1">
+          <mxGeometry height="300" width="350" x="970" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="container-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=21;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#9A3412;" value="&lt;b&gt;PostgreSQL container&lt;/b&gt;" vertex="1">
+          <mxGeometry height="42" width="310" x="990" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="spring" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#60A5FA;strokeWidth=2;spacing=14;" value="&lt;b&gt;1 · CLIENT&lt;/b&gt;&lt;br&gt;&lt;br&gt;Spring Boot application&lt;br&gt;running on your Mac" vertex="1">
+          <mxGeometry height="135" width="240" x="85" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="published-port" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#EEF2FF;strokeColor=#818CF8;strokeWidth=2;spacing=14;" value="&lt;b&gt;2 · HOST ENTRY&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;127.0.0.1:5433&lt;/b&gt;&lt;br&gt;Published on your Mac" vertex="1">
+          <mxGeometry height="135" width="240" x="390" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="docker-forwarding" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=17;fontColor=#0F172A;fillColor=#ECFDF5;strokeColor=#34D399;strokeWidth=2;spacing=14;" value="&lt;b&gt;3 · DOCKER&lt;/b&gt;&lt;br&gt;&lt;br&gt;Forwards the connection&lt;br&gt;host 5433 → container 5432" vertex="1">
+          <mxGeometry height="135" width="240" x="695" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="postgres" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#FFEDD5;strokeColor=#FB923C;strokeWidth=2;spacing=14;" value="&lt;b&gt;4 · POSTGRESQL&lt;/b&gt;&lt;br&gt;&lt;br&gt;&lt;b&gt;&amp;lt;container-ip&amp;gt;:5432&lt;/b&gt;&lt;br&gt;Database listener" vertex="1">
+          <mxGeometry height="135" width="300" x="995" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="container-ip-note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=15;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=center;verticalAlign=middle;spacing=0;fontColor=#9A3412;" value="Container IP is assigned by Docker.&lt;br&gt;It is not the Mac’s 127.0.0.1." vertex="1">
+          <mxGeometry height="45" width="310" x="990" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="client-to-host" edge="1" parent="1" source="spring" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=3;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="published-port">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="host-to-forwarder" edge="1" parent="1" source="published-port" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=3;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="docker-forwarding">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="forwarder-to-postgres" edge="1" parent="1" source="docker-forwarding" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=3;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="postgres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="connection-note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#334155;" value="Arrows show the connection path. Requests and responses use the same TCP connection." vertex="1">
+          <mxGeometry height="40" width="1200" x="85" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="mapping-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=23;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#0F172A;" value="&lt;b&gt;Read the Compose mapping from left to right&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="1300" x="50" y="675" as="geometry" />
+        </mxCell>
+        <mxCell id="host-ip" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#EEF2FF;strokeColor=#818CF8;strokeWidth=2;spacing=14;" value="&lt;b&gt;127.0.0.1&lt;/b&gt;&lt;br&gt;HOST IP&lt;br&gt;Local access from this Mac only" vertex="1">
+          <mxGeometry height="110" width="400" x="50" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="colon1" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=32;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=center;verticalAlign=middle;spacing=0;fontColor=#64748B;" value=":" vertex="1">
+          <mxGeometry height="55" width="35" x="455" y="755" as="geometry" />
+        </mxCell>
+        <mxCell id="host-port" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#60A5FA;strokeWidth=2;spacing=14;" value="&lt;b&gt;5433&lt;/b&gt;&lt;br&gt;HOST PORT&lt;br&gt;The port used by Spring on the Mac" vertex="1">
+          <mxGeometry height="110" width="400" x="500" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="colon2" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=32;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=center;verticalAlign=middle;spacing=0;fontColor=#64748B;" value=":" vertex="1">
+          <mxGeometry height="55" width="35" x="905" y="755" as="geometry" />
+        </mxCell>
+        <mxCell id="container-port" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#FFEDD5;strokeColor=#FB923C;strokeWidth=2;spacing=14;" value="&lt;b&gt;5432&lt;/b&gt;&lt;br&gt;CONTAINER PORT&lt;br&gt;The port PostgreSQL listens on" vertex="1">
+          <mxGeometry height="110" width="400" x="950" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="actual-config" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=17;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#334155;" value="&lt;b&gt;Current project:&lt;/b&gt; the default mapping is 127.0.0.1:5432:5432. This drawing uses 5433 to distinguish the two ports." vertex="1">
+          <mxGeometry height="45" width="1300" x="50" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="vm-note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=15;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=14;align=left;verticalAlign=middle;spacing=0;fontColor=#64748B;" value="Conceptual view: Docker Desktop uses a Linux VM on macOS. VM internals and exact forwarding machinery are omitted." vertex="1">
+          <mxGeometry height="40" width="1300" x="50" y="925" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="spring-tcp-connection-flow" name="spring-tcp-conntection">
+    <mxGraphModel grid="0" page="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="1600" pageHeight="1500" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=31;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#0F172A;align=left;spacing=0;" value="&lt;b&gt;One database connection, three different port roles&lt;/b&gt;" vertex="1">
+          <mxGeometry height="50" width="1500" x="50" y="25" as="geometry" />
+        </mxCell>
+        <mxCell id="subtitle" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=21;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#475569;align=left;spacing=0;" value="Learning example: &lt;b&gt;127.0.0.1:5433:5432&lt;/b&gt; · Client source port &lt;b&gt;52184&lt;/b&gt; is an example chosen by macOS." vertex="1">
+          <mxGeometry height="40" width="1500" x="50" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="mac" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#F8FAFC;strokeColor=#94A3B8;strokeWidth=2;spacing=12;" value="" vertex="1">
+          <mxGeometry height="620" width="1520" x="40" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="mac-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=24;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#0F172A;align=left;spacing=0;" value="&lt;b&gt;MacBook / macOS&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="1000" x="65" y="165" as="geometry" />
+        </mxCell>
+        <mxCell id="jvm" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#EFF6FF;strokeColor=#60A5FA;strokeWidth=2;spacing=12;" value="" vertex="1">
+          <mxGeometry height="305" width="390" x="75" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="jvm-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=21;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#1E40AF;align=left;spacing=0;" value="&lt;b&gt;Spring Boot application / JVM&lt;/b&gt;" vertex="1">
+          <mxGeometry height="35" width="350" x="95" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="java-code" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#93C5FD;strokeWidth=2;spacing=12;" value="&lt;b&gt;Your Java code / JPA&lt;/b&gt;&lt;br&gt;Requests a database connection" vertex="1">
+          <mxGeometry height="75" width="340" x="100" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="jdbc" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=17;fontColor=#0F172A;fillColor=#FFFFFF;strokeColor=#93C5FD;strokeWidth=2;spacing=12;" value="&lt;b&gt;PostgreSQL JDBC driver&lt;/b&gt;&lt;br&gt;The database client inside the JVM&lt;br&gt;Asks macOS to connect to 127.0.0.1:5433" vertex="1">
+          <mxGeometry height="90" width="340" x="100" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="java-to-driver" edge="1" parent="1" source="java-code" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#64748B;strokeWidth=2;startArrow=none;endArrow=block;endFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="jdbc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="os-connect-label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=16;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#475569;align=left;spacing=0;" value="macOS creates an outgoing socket" vertex="1">
+          <mxGeometry height="30" width="450" x="300" y="535" as="geometry" />
+        </mxCell>
+        <mxCell id="socket" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#DBEAFE;strokeColor=#60A5FA;strokeWidth=2;spacing=12;" value="&lt;b&gt;CLIENT SOURCE&lt;/b&gt;&lt;br&gt;&lt;b&gt;127.0.0.1:52184&lt;/b&gt;&lt;br&gt;Temporary port assigned by macOS" vertex="1">
+          <mxGeometry height="115" width="365" x="85" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="driver-to-socket" edge="1" parent="1" source="jdbc" style="rounded=0;html=1;strokeColor=#64748B;strokeWidth=2;startArrow=none;endArrow=block;endFill=1;entryX=0.5;entryY=0;exitX=0.495;exitY=0.998;exitDx=0;exitDy=0;exitPerimeter=0;" target="socket">
+          <mxGeometry relative="1" x="0.3015" as="geometry" />
+        </mxCell>
+        <mxCell id="host-endpoint" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#EEF2FF;strokeColor=#818CF8;strokeWidth=2;spacing=12;" value="&lt;b&gt;HOST DESTINATION&lt;/b&gt;&lt;br&gt;&lt;b&gt;127.0.0.1:5433&lt;/b&gt;&lt;br&gt;Published port on the Mac" vertex="1">
+          <mxGeometry height="115" width="280" x="510" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="docker" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=17;fontColor=#0F172A;fillColor=#ECFDF5;strokeColor=#34D399;strokeWidth=2;spacing=12;" value="&lt;b&gt;DOCKER FORWARDING&lt;/b&gt;&lt;br&gt;Host 5433 → container 5432&lt;br&gt;Outside the PostgreSQL container" vertex="1">
+          <mxGeometry height="115" width="250" x="850" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="container" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#FFF7ED;strokeColor=#F59E0B;strokeWidth=2;spacing=12;dashed=1;dashPattern=6 4;" value="" vertex="1">
+          <mxGeometry height="285" width="390" x="1130" y="455" as="geometry" />
+        </mxCell>
+        <mxCell id="container-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=23;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#9A3412;align=left;spacing=0;" value="&lt;b&gt;PostgreSQL container&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="350" x="1150" y="475" as="geometry" />
+        </mxCell>
+        <mxCell id="listener-note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=17;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#9A3412;align=center;spacing=0;" value="PostgreSQL is already listening here." vertex="1">
+          <mxGeometry height="40" width="350" x="1150" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="postgres" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#FFEDD5;strokeColor=#FB923C;strokeWidth=2;spacing=12;" value="&lt;b&gt;DATABASE DESTINATION&lt;/b&gt;&lt;br&gt;&lt;b&gt;&amp;lt;container-ip&amp;gt;:5432&lt;/b&gt;&lt;br&gt;PostgreSQL server" vertex="1">
+          <mxGeometry height="115" width="340" x="1155" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="source-to-host" edge="1" parent="1" source="socket" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=3;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="host-endpoint">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="host-to-docker" edge="1" parent="1" source="host-endpoint" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=3;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="docker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="docker-to-pg" edge="1" parent="1" source="docker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#2563EB;strokeWidth=3;startArrow=block;startFill=1;endArrow=block;endFill=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="postgres">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="socket-explanation" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=21;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#334155;align=left;spacing=0;" value="&lt;b&gt;52184 is not another published server port.&lt;/b&gt;&lt;br&gt;It identifies the client end of this outgoing TCP connection.&lt;br&gt;Spring and JDBC work in the same JVM; there is no extra network hop between them." vertex="1">
+          <mxGeometry height="85" width="950" x="520" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="directions" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#475569;align=left;spacing=0;" value="Blue arrows: TCP traffic in both directions.&lt;br&gt;Grey arrows: calls inside the client application / operating system." vertex="1">
+          <mxGeometry height="70" width="560" x="520" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="ports-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=24;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#0F172A;align=left;spacing=0;" value="&lt;b&gt;Keep the port roles separate&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="1500" x="50" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="source-role" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#DBEAFE;strokeColor=#60A5FA;strokeWidth=2;spacing=12;" value="&lt;b&gt;52184 · CLIENT SOURCE PORT&lt;/b&gt;&lt;br&gt;Selected automatically by macOS.&lt;br&gt;You do not add it to Compose.&lt;br&gt;Another connection may get a different port." vertex="1">
+          <mxGeometry height="125" width="470" x="50" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="host-role" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#EEF2FF;strokeColor=#818CF8;strokeWidth=2;spacing=12;" value="&lt;b&gt;5433 · PUBLISHED HOST PORT&lt;/b&gt;&lt;br&gt;Chosen in the Compose mapping.&lt;br&gt;Spring uses it as the destination port&lt;br&gt;when it runs directly on the Mac." vertex="1">
+          <mxGeometry height="125" width="470" x="565" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="db-role" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=19;fontColor=#0F172A;fillColor=#FFEDD5;strokeColor=#FB923C;strokeWidth=2;spacing=12;" value="&lt;b&gt;5432 · DATABASE LISTENING PORT&lt;/b&gt;&lt;br&gt;Used by PostgreSQL inside the container.&lt;br&gt;Docker forwards traffic to this port.&lt;br&gt;Docker does not reconfigure PostgreSQL." vertex="1">
+          <mxGeometry height="125" width="470" x="1080" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="timeline-title" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=24;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#0F172A;align=left;spacing=0;" value="&lt;b&gt;What happens when a new connection is needed?&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="1500" x="50" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="tcp-label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#F1F5F9;strokeColor=#CBD5E1;strokeWidth=2;spacing=12;" value="&lt;b&gt;1 · TCP CONNECT&lt;/b&gt;" vertex="1">
+          <mxGeometry height="63" width="285" x="50" y="1105" as="geometry" />
+        </mxCell>
+        <mxCell id="tcp-body" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#334155;align=left;spacing=0;" value="The driver requests a connection to 127.0.0.1:5433. macOS chooses source port 52184.&lt;br&gt;TCP is established through Docker forwarding (SYN → SYN-ACK → ACK)." vertex="1">
+          <mxGeometry height="63" width="1195" x="355" y="1105" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#F1F5F9;strokeColor=#CBD5E1;strokeWidth=2;spacing=12;" value="&lt;b&gt;2 · DATABASE PROTOCOL&lt;/b&gt;" vertex="1">
+          <mxGeometry height="63" width="285" x="50" y="1180" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-body" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#334155;align=left;spacing=0;" value="The driver and PostgreSQL set up their protocol and authenticate the database user&lt;br&gt;(with TLS negotiation if configured). TCP exists before SQL queries are sent." vertex="1">
+          <mxGeometry height="63" width="1195" x="355" y="1180" as="geometry" />
+        </mxCell>
+        <mxCell id="sql-label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#F1F5F9;strokeColor=#CBD5E1;strokeWidth=2;spacing=12;" value="&lt;b&gt;3 · SQL AND RESULTS&lt;/b&gt;" vertex="1">
+          <mxGeometry height="63" width="285" x="50" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="sql-body" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#334155;align=left;spacing=0;" value="The driver sends a query, for example SELECT 1. PostgreSQL returns its result.&lt;br&gt;Both directions use the established connection; each query does not need a new source port." vertex="1">
+          <mxGeometry height="63" width="1195" x="355" y="1255" as="geometry" />
+        </mxCell>
+        <mxCell id="pool-label" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=#F1F5F9;strokeColor=#CBD5E1;strokeWidth=2;spacing=12;" value="&lt;b&gt;4 · CONNECTION REUSE&lt;/b&gt;" vertex="1">
+          <mxGeometry height="63" width="285" x="50" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="pool-body" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=18;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#334155;align=left;spacing=0;" value="Spring normally uses HikariCP to keep a pool of database connections.&lt;br&gt;A later query can reuse an existing connection instead of opening a new TCP connection." vertex="1">
+          <mxGeometry height="63" width="1195" x="355" y="1330" as="geometry" />
+        </mxCell>
+        <mxCell id="http-note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=16;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#475569;align=left;spacing=0;" value="An HTTP request to Spring (for example port 8080) is a separate connection. Spring acts as a client when it accesses PostgreSQL." vertex="1">
+          <mxGeometry height="30" width="1500" x="50" y="1425" as="geometry" />
+        </mxCell>
+        <mxCell id="simplified-note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=14;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#64748B;align=left;spacing=0;" value="Conceptual view: Docker Desktop VM/proxy internals are omitted. The source address/port seen by PostgreSQL may be translated." vertex="1">
+          <mxGeometry height="25" width="1500" x="50" y="1470" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="EJsvYApdCwMOTdXbS8uH" name="sketch">
+    <mxGraphModel dx="1488" dy="835" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-2" parent="1" style="whiteSpace=wrap;html=1;fillColor=none;align=left;verticalAlign=top;spacing=10;fontFamily=JetBrains Mono;" value="&lt;b&gt;MAC BOOK&lt;/b&gt;" vertex="1">
+          <mxGeometry height="300" width="360" x="170" y="130" as="geometry" />
+        </mxCell>
+        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-1" parent="1" style="whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontStyle=1;fontFamily=JetBrains Mono;" value="DOCKER" vertex="1">
+          <mxGeometry height="110" width="180" x="260" y="190" as="geometry" />
+        </mxCell>
+        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-3" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
+          <mxGeometry height="94" width="15" x="343" y="236" as="geometry" />
+        </mxCell>
+        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=JetBrains Mono;" value="&lt;pre dir=&quot;ltr&quot;&gt;&lt;code&gt;127.0.0.1:5433&lt;/code&gt;&lt;/pre&gt;" vertex="1">
+          <mxGeometry height="30" width="60" x="320" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=JetBrains Mono;" value="?:5432" vertex="1">
+          <mxGeometry height="30" width="60" x="320" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-6" parent="1" style="whiteSpace=wrap;html=1;fontStyle=1;fontFamily=JetBrains Mono;fillColor=#ffe6cc;strokeColor=#d79b00;" value="POSTGRES" vertex="1">
+          <mxGeometry height="37" width="68" x="320" y="199" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
