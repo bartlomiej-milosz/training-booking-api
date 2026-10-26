@@ -63,6 +63,12 @@ Added the adjacent `Spring TCP connection` learning page: Java/JPA and JDBC insi
 - `lsof` confirmed the HTTP server was listening on loopback. The application was then stopped with Ctrl+C to leave port 8080 free for the user's own launch. PostgreSQL remains running.
 - No automated test suite was run for this configuration-only change. Runtime connectivity is verified; business schema constraints and application behavior do not exist yet.
 
+## UUID identifier decision
+
+The user explicitly selected UUID entity identifiers on 2026-10-26. Updated database column types, corresponding foreign keys, API string examples and 26 type labels in the database diagram. Existing learning pages and user page names/order were preserved. Documented PostgreSQL gen_random_uuid() / UUID v4 as the SQL default for newly generated entity IDs; profile shared keys and foreign keys reuse existing values.
+
+Before this change, a read-only check of the local Flyway history showed zero applied versioned migrations and no room table. The user was actively editing V1__create_room.sql, so the migration draft was left untouched. The next step is to finish that migration with a UUID primary key, then verify it through Flyway and test its constraints on PostgreSQL. No migration or application test was executed for this documentation decision.
+
 ## Milestones
 
 | Slice | Status | Evidence |

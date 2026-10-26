@@ -8,7 +8,7 @@ There are 12 business tables. Authentication uses framework-managed HTTP session
 
 ## Reading the model
 
-`PK` = primary key, `FK` = foreign key. `NULL` is allowed only where stated. Composite keys combine columns. Identity IDs use `bigint GENERATED ... AS IDENTITY`; IDs may be exposed by the API; every request still requires authorization. IDs are not access tokens.
+`PK` = primary key, `FK` = foreign key. `NULL` is allowed only where stated. Composite keys combine columns. Entity identifiers and their referencing columns use PostgreSQL `uuid`, mapped to `java.util.UUID`. Newly created entity IDs have `DEFAULT gen_random_uuid()` (UUID v4) for database-side generation when omitted from an INSERT. Shared profile IDs and foreign keys reuse an existing identifier and must not generate a new one. Composite keys retain their role-code components. IDs may be exposed as JSON strings; every request still requires authorization. IDs are not access tokens.
 
 A table is not automatically a Java class. This model describes persisted facts and constraints; it does not prescribe services, DTOs, inheritance or interfaces.
 
@@ -18,7 +18,7 @@ Login identity and contact details. One account may have several roles.
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Internal identifier. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Internal identifier. |
 | `email` | `varchar(254)` | NOT NULL, UNIQUE after normalization | Store a trimmed, lowercase email using an explicitly documented policy. |
 | `password_hash` | `text` | NOT NULL | Password hash produced by the authentication framework, never a plaintext password. |
 | `first_name` | `varchar(100)` | NOT NULL | Given name. |
@@ -33,7 +33,7 @@ Association table. OWNER, TRAINER and MEMBER are fixed role codes; the owner per
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `user_id` | `bigint` | PK part, FK -> app_user.id | Account holding the role. |
+| `user_id` | `uuid` | PK part, FK -> app_user.id | Account holding the role. |
 | `role` | `varchar(20)` | PK part, CHECK | OWNER, TRAINER or MEMBER. Composite primary key: (user_id, role). |
 
 ## `skill_level`
@@ -42,7 +42,7 @@ Small reference table shared by member profiles and training groups.
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Identifier. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Identifier. |
 | `code` | `varchar(30)` | NOT NULL, UNIQUE | BEGINNER, INTERMEDIATE or ADVANCED. |
 | `name` | `varchar(100)` | NOT NULL | Display name. |
 
@@ -52,8 +52,8 @@ An account participating in club activities. This is not a purchased membership.
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `user_id` | `bigint` | PK, FK -> app_user.id | One member profile per account. |
-| `skill_level_id` | `bigint` | NULL, FK -> skill_level.id | Current assessed level; NULL means not assessed. |
+| `user_id` | `uuid` | PK, FK -> app_user.id | One member profile per account. |
+| `skill_level_id` | `uuid` | NULL, FK -> skill_level.id | Current assessed level; NULL means not assessed. |
 | `joined_on` | `date` | NOT NULL | Date of joining the club. |
 
 ## `trainer_profile`
@@ -62,7 +62,7 @@ Trainer-specific details. The profile allows sessions to reference trainers rath
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `user_id` | `bigint` | PK, FK -> app_user.id | One trainer profile per account. |
+| `user_id` | `uuid` | PK, FK -> app_user.id | One trainer profile per account. |
 | `bio` | `text` | NULL | Public trainer description. |
 | `active` | `boolean` | NOT NULL | Whether new sessions may be assigned to this trainer. |
 
@@ -72,10 +72,10 @@ A reusable type of group class, such as Beginner Boxing. It is not a fixed roste
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Identifier. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Identifier. |
 | `name` | `varchar(120)` | NOT NULL, UNIQUE | Group name. |
 | `description` | `text` | NULL | Description. |
-| `recommended_level_id` | `bigint` | NULL, FK -> skill_level.id | Recommended level; NULL means open level. Informational in version 1, not an automatic eligibility gate. |
+| `recommended_level_id` | `uuid` | NULL, FK -> skill_level.id | Recommended level; NULL means open level. Informational in version 1, not an automatic eligibility gate. |
 | `default_capacity` | `integer` | NOT NULL, CHECK > 0 | Default copied when creating a session. |
 | `default_duration_minutes` | `integer` | NOT NULL, CHECK > 0 | Default duration. |
 | `active` | `boolean` | NOT NULL | Whether the group can be used for new sessions. |
@@ -86,7 +86,7 @@ A physical training space within the single club.
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Identifier. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Identifier. |
 | `name` | `varchar(100)` | NOT NULL, UNIQUE | Room name. |
 | `capacity` | `integer` | NOT NULL, CHECK > 0 | Maximum supported participant count. |
 | `active` | `boolean` | NOT NULL | Whether the room can be scheduled. |
@@ -97,10 +97,10 @@ One dated class with one room and one lead trainer. Dates and capacity belong to
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Identifier. |
-| `group_id` | `bigint` | NOT NULL, FK -> training_group.id | Class group/template. |
-| `trainer_id` | `bigint` | NOT NULL, FK -> trainer_profile.user_id | Assigned trainer. |
-| `room_id` | `bigint` | NOT NULL, FK -> room.id | Assigned room. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Identifier. |
+| `group_id` | `uuid` | NOT NULL, FK -> training_group.id | Class group/template. |
+| `trainer_id` | `uuid` | NOT NULL, FK -> trainer_profile.user_id | Assigned trainer. |
+| `room_id` | `uuid` | NOT NULL, FK -> room.id | Assigned room. |
 | `starts_at` | `timestamptz` | NOT NULL | Start instant. |
 | `ends_at` | `timestamptz` | NOT NULL, CHECK > starts_at | End instant. |
 | `booking_closes_at` | `timestamptz` | NOT NULL, CHECK <= starts_at | Latest instant for a new reservation. |
@@ -117,7 +117,7 @@ The current commercial offer. Purchased memberships preserve their own contract 
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Identifier. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Identifier. |
 | `name` | `varchar(120)` | NOT NULL | For example: Monthly 8 or Monthly 12. |
 | `price_amount` | `numeric(12,2)` | NOT NULL, CHECK > 0 | Price, e.g. 220.00 or 260.00. |
 | `currency` | `varchar(3)` | NOT NULL, CHECK = PLN | Version 1 accepts PLN only. |
@@ -131,9 +131,9 @@ One purchased pass owned by one member. Price and entitlement snapshots are inte
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Identifier. |
-| `member_id` | `bigint` | NOT NULL, FK -> member_profile.user_id | Pass holder. |
-| `plan_id` | `bigint` | NOT NULL, FK -> membership_plan.id | Source offer. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Identifier. |
+| `member_id` | `uuid` | NOT NULL, FK -> member_profile.user_id | Pass holder. |
+| `plan_id` | `uuid` | NOT NULL, FK -> membership_plan.id | Source offer. |
 | `plan_name` | `varchar(120)` | NOT NULL | Name at purchase. |
 | `price_amount` | `numeric(12,2)` | NOT NULL, CHECK > 0 | Agreed price at purchase. |
 | `currency` | `varchar(3)` | NOT NULL, CHECK = PLN | Agreed currency. |
@@ -151,14 +151,14 @@ A successful manual payment recorded by an owner for exactly one membership. V1 
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Identifier. |
-| `membership_id` | `bigint` | NOT NULL, FK -> membership.id | Purchase being paid for. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Identifier. |
+| `membership_id` | `uuid` | NOT NULL, FK -> membership.id | Purchase being paid for. |
 | `amount` | `numeric(12,2)` | NOT NULL, CHECK > 0 | Full purchase amount in version 1. |
 | `currency` | `varchar(3)` | NOT NULL, CHECK = PLN | Payment currency. |
 | `method` | `varchar(20)` | NOT NULL, CHECK | CASH or BANK_TRANSFER. |
 | `idempotency_key` | `uuid` | NOT NULL, UNIQUE | Identifies a repeated request to record this payment. |
 | `status` | `varchar(20)` | NOT NULL, CHECK | SUCCEEDED only in V1; retain as an explicit financial fact. |
-| `recorded_by_user_id` | `bigint` | NOT NULL, FK -> app_user.id | Authenticated owner who recorded the payment. |
+| `recorded_by_user_id` | `uuid` | NOT NULL, FK -> app_user.id | Authenticated owner who recorded the payment. |
 | `created_at` | `timestamptz` | NOT NULL | Record creation time. |
 | `paid_at` | `timestamptz` | NOT NULL | Server time at confirmation; no backdating in V1. |
 
@@ -168,17 +168,17 @@ One reservation attempt for one member, session and purchased pass. Timely reboo
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
-| `id` | `bigint` | PK, identity | Identifier. |
-| `member_id` | `bigint` | NOT NULL, FK -> member_profile.user_id | Participant. |
-| `session_id` | `bigint` | NOT NULL, FK -> training_session.id | Dated class. |
-| `membership_id` | `bigint` | NOT NULL, composite FK with member_id -> membership(id, member_id) | Pass covering the reservation; the composite FK prevents using another member's pass. |
+| `id` | `uuid` | PK, DEFAULT gen_random_uuid() | Identifier. |
+| `member_id` | `uuid` | NOT NULL, FK -> member_profile.user_id | Participant. |
+| `session_id` | `uuid` | NOT NULL, FK -> training_session.id | Dated class. |
+| `membership_id` | `uuid` | NOT NULL, composite FK with member_id -> membership(id, member_id) | Pass covering the reservation; the composite FK prevents using another member's pass. |
 | `status` | `varchar(20)` | NOT NULL, CHECK | RESERVED, CANCELLED, LATE_CANCELLED, ATTENDED or NO_SHOW. |
 | `created_at` | `timestamptz` | NOT NULL | Reservation creation time. |
 | `cancelled_at` | `timestamptz` | NULL | Required for CANCELLED and LATE_CANCELLED, otherwise NULL. |
-| `cancelled_by_user_id` | `bigint` | NULL, FK -> app_user.id | Actor cancelling the reservation, including an owner cancelling a class. |
+| `cancelled_by_user_id` | `uuid` | NULL, FK -> app_user.id | Actor cancelling the reservation, including an owner cancelling a class. |
 | `cancellation_reason` | `text` | NULL | Optional explanation. |
 | `attendance_recorded_at` | `timestamptz` | NULL | Required for ATTENDED or NO_SHOW, otherwise NULL. |
-| `attendance_recorded_by_user_id` | `bigint` | NULL, FK -> app_user.id | Trainer or owner recording attendance. |
+| `attendance_recorded_by_user_id` | `uuid` | NULL, FK -> app_user.id | Trainer or owner recording attendance. |
 
 ## Required physical constraints
 

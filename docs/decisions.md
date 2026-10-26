@@ -15,6 +15,12 @@ Prepared 2026-10-23. This is a compact implementation brief, not a claim of depl
 
 The user selected **Spring Boot Boxing Academy API** and repository name `spring-boot-boxing-academy-api`. This naming decision is confirmed; the business-policy defaults below remain recommendations.
 
+## Confirmed entity identifier policy
+
+On 2026-10-26 the user selected UUID identifiers as a consistent project convention. Use PostgreSQL `uuid` for entity primary keys and all corresponding foreign keys, `java.util.UUID` in Java and UUID strings in API contracts. New entity rows use `DEFAULT gen_random_uuid()` (UUID v4) for SQL inserts that omit their ID. Profile primary keys shared with app_user and other foreign keys reuse the referenced ID; they do not independently generate it. The existing role-code part of the user_role composite key remains text.
+
+The tradeoff is larger identifiers and longer manual queries in exchange for independently generatable, non-sequential IDs. UUID is a project choice, not a universal requirement or an access-control mechanism. The default generates a value, while PRIMARY KEY enforces uniqueness and non-nullness. Future JPA mapping must use the UUID type and choose an explicit compatible generation strategy when that slice is implemented.
+
 ## Defaults selected for this handoff
 
 These are deliberate recommendations to make V1 implementable. They were not all previously explicit user decisions. They may be revised before affected implementation; keep the specification and tests consistent if changed.

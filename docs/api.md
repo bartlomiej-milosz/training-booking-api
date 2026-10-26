@@ -5,7 +5,7 @@ This is a design contract, not an executable OpenAPI document. Implement and doc
 ## Conventions
 
 - JSON camelCase DTOs; never serialize JPA entities or password hashes.
-- Internal bigint IDs may be exposed as JSON integers. They are identifiers, not authorization. Do not add public UUID columns just for appearance.
+- Entity IDs use UUID strings in JSON, path parameters and filters; Java uses java.util.UUID. Reuse the same ID in persistence and the API rather than adding a separate public-ID column. IDs are identifiers, not authorization.
 - Dates: `YYYY-MM-DD`. Timestamps: ISO-8601 with offset on input, UTC `Z` on output. Amounts: decimal strings plus currency.
 - Lists: `{ "items": [], "page": 0, "size": 20, "totalElements": 0, "totalPages": 0 }`. Maximum size 100; validate nonnegative page and positive size. Whitelist sort fields and include ID as a stable tie-breaker. Schedule defaults to startsAt,id ascending.
 - 201 + Location for creation, 200 for reads/commands/replays, 204 for logout or successful password change. No redirects.
@@ -61,7 +61,7 @@ A schedule response includes IDs/display names of group, trainer and room; start
 
 | Method and path | Access and intent |
 |---|---|
-| POST `/memberships` | MEMBER; `{ "planId": 1 }`; creates own PENDING_PAYMENT pass. |
+| POST `/memberships` | MEMBER; `{ "planId": "3583843b-1d5a-4318-993b-fbacb012f105" }`; creates own PENDING_PAYMENT pass. |
 | GET `/me/memberships` | MEMBER; own passes, including snapshots, validity and held/used/available entries. |
 | GET `/memberships/{id}` | Owning MEMBER or OWNER; private-resource authorization. |
 | GET `/memberships` | OWNER; paginated, filter memberId/status. |
@@ -86,7 +86,7 @@ Purchase creation is not idempotent in V1: a retried POST may create another unp
 Example booking body:
 
 ```json
-{ "sessionId": 42, "membershipId": 7 }
+{ "sessionId": "350bf44c-e530-49e0-b8af-03a0be197b52", "membershipId": "ba16a8c1-a30e-4504-a4b5-09e7f078fd70" }
 ```
 
 Example capacity conflict (illustrative, not evidence of an implemented endpoint):
