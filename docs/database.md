@@ -1,6 +1,6 @@
 # V1 database model
 
-Status: implementation specification, not executed DDL. This document defines the V1 columns; [business rules](business-rules.md) define their behavior.
+Status: target V1 specification. Only room is implemented by an applied SQL migration; the remaining tables are planned. This document defines the V1 columns; [business rules](business-rules.md) define their behavior.
 
 The [original broader proposal](reference/original-data-model.md) is preserved for context. V1 intentionally omits refunds, online-provider fields, payment-event inboxes, verification/reset tokens and revoked passes. Do not implement those from the historical diagram.
 
@@ -68,7 +68,7 @@ Trainer-specific details. The profile allows sessions to reference trainers rath
 
 ## `training_group`
 
-A reusable type of group class, such as Beginner Boxing. It is not a fixed roster and not a dated session.
+A reusable type of group class, such as Beginner Training. It is not a fixed roster and not a dated session.
 
 | Column | Type | Rules | Meaning |
 |---|---|---|---|
@@ -221,6 +221,6 @@ Do not persist remaining_entries, seats_available, EXPIRED/EXHAUSTED flags or a 
 
 ## Diagrams and verification
 
-[ER overview](diagrams/schema.mmd) and [editable draw.io diagram](diagrams/boxing-academy.drawio) describe V1. They omit secondary audit-actor links; the column tables and constraints here are authoritative. The legacy diagrams in reference/ include future refunds and are not V1 specifications.
+[ER overview](diagrams/schema.mmd) and [editable draw.io diagram](diagrams/training-booking-api.drawio) describe V1. They omit secondary audit-actor links; the column tables and constraints here are authoritative. The legacy diagrams in reference/ include future refunds and are not V1 specifications.
 
-No migration has been run. Creating documentation and parsing diagram XML does not validate SQL, ORM mappings or concurrency behavior.
+V1__create_room.sql is applied locally and also passed a fresh PostgreSQL Testcontainers startup. The remaining schema is a design, not executed DDL. Parsing diagram XML does not validate future SQL, ORM mappings or concurrency behavior.

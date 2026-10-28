@@ -1,12 +1,12 @@
-package dev.bartmilo.boxingacademy;
+package dev.bartmilo.trainingbooking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BoxingAcademyApplication {
+public class TrainingBookingApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(BoxingAcademyApplication.class, args);
+    SpringApplication.run(TrainingBookingApplication.class, args);
   }
 }

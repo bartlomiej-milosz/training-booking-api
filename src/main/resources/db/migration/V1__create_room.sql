@@ -5,6 +5,6 @@ CREATE TABLE room (
     active boolean NOT NULL DEFAULT true,
 
     CONSTRAINT uk_room_name UNIQUE (name),
-    CONSTRAINT ck_room_not_blank CHECK (name <> ''),
+    CONSTRAINT ck_room_not_blank CHECK (btrim(name) <> ''),
     CONSTRAINT ck_room_capacity_positive CHECK (capacity > 0)
 );

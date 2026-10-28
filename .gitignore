@@ -17,7 +17,7 @@ target/
 !.env.example
 
 # Draw.io backup files
-docs/diagrams/.$boxing-academy.drawio.bkp
+docs/diagrams/.*.drawio.bkp
 
 # Local VS Code configuration
 .vscode/

@@ -1,4 +1,4 @@
-# Agent instructions for Spring Boot Boxing Academy API
+# Agent instructions for Training Booking API
 
 ## Purpose and language
 

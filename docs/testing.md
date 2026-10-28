@@ -59,4 +59,4 @@ Select a Maven test layout so `./mvnw --batch-mode verify` actually includes int
 
 In a clean checkout, validate build, migrations, `docker compose up --build`, health/readiness and the documented request walkthrough. Include owner account creation, member purchase, payment, booking, cancellation and trainer attendance. Use relative demo dates or a documented demo-only adjustable Clock; do not make reviewers wait for a future class to end. Never expose a clock-control endpoint in normal runtime.
 
-Record commands, environment, counts and failures in [development/progress.md](development/progress.md). Remote CI remains unverified until it actually runs. The current documentation stage has run no Java, database or container tests.
+Record commands, environment, counts and failures in [development/progress.md](development/progress.md). Remote CI remains unverified until it actually runs. The implemented room slice currently passes 30 tests including PostgreSQL-backed HTTP and constraint checks. The broader booking, identity, payment and concurrency suites above remain acceptance requirements, not completed tests.

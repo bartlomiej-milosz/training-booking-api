@@ -2,6 +2,14 @@
 
 This is a design contract, not an executable OpenAPI document. Implement and document each endpoint with its slice; generate OpenAPI from the actual application before completion. Prefix business routes with `/api/v1`.
 
+## Current implementation
+
+Only the room catalog routes are implemented: GET /rooms, GET /rooms/{id}, POST /rooms and PATCH /rooms/{id}, all under /api/v1. Other routes below remain planned. Authentication still uses Spring Security's initial framework configuration; real club users, owner bootstrap and session endpoints remain the next slice. Role/CSRF tests use simulated authenticated principals and do not establish the real login workflow.
+
+Room lists accept page (nonnegative), size (1..100, default 20) and includeInactive (OWNER only when true). Ordering is fixed to name,id; a dynamic sort parameter is not exposed yet. Single-room reads expose inactive records only to OWNER and return 404 otherwise. Creation accepts name, positive integer capacity and optional active (default true). Names are trimmed. PATCH accepts optional name/active only; an empty object is a no-op. Unknown body fields, including capacity on PATCH, return 400. No DELETE endpoint exists.
+
+Room validation/business errors use ProblemDetail with VALIDATION_ERROR (including field messages), INVALID_REQUEST, ROOM_NOT_FOUND and ROOM_NAME_ALREADY_EXISTS as applicable. Security filter-level 401/403 responses still use framework defaults and will be standardized with the identity slice.
+
 ## Conventions
 
 - JSON camelCase DTOs; never serialize JPA entities or password hashes.
@@ -36,6 +44,7 @@ These paths also use the `/api/v1` prefix. Use framework authentication filters 
 | GET `/trainers` | Authenticated; public-in-club trainer DTOs only, no contact details. |
 | PATCH `/trainers/{id}` | OWNER; bio/active only. |
 | GET `/groups`, `/rooms`, `/membership-plans` | Authenticated; active catalog by default; OWNER may include inactive entries. |
+| GET `/rooms/{id}` | Authenticated; active room, or any room for OWNER; otherwise 404. |
 | POST `/groups`, `/rooms`, `/membership-plans` | OWNER creates catalog entry. |
 | PATCH `/groups/{id}` | OWNER updates descriptive fields/defaults/active; no changes to existing sessions. |
 | PATCH `/rooms/{id}` | OWNER updates name/active only; capacity immutable in V1. |

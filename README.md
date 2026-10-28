@@ -1,8 +1,8 @@
-# Spring Boot Boxing Academy API
+# Training Booking API
 
-A Java backend project for managing a boxing academy's members, training schedule, entry-limited passes, bookings and payment records.
+A Java backend project for managing a training club's members, training schedule, entry-limited passes, bookings and payment records.
 
-**Status: application scaffold with a verified local database connection. The local Spring Boot profile starts against Compose PostgreSQL and its health endpoint reports UP. Domain features, SQL migrations and authentication workflows are not implemented yet.**
+**Status: room catalog implemented and tested. Spring Boot maps the Flyway room table through JPA and exposes room reads, creation and limited updates. Real club accounts, session authentication and the remaining domain workflows are not implemented yet.**
 
 ## Planned functionality
 
@@ -31,9 +31,9 @@ Spring Boot manages library versions. Docker Compose runs local PostgreSQL; cust
 
 This directory is the single-module Maven project root; there is no nested application directory.
 
-- Repository directory: `spring-boot-boxing-academy-api`.
-- Maven coordinates: `dev.bartmilo:boxing-academy-api`.
-- Java base package: `dev.bartmilo.boxingacademy`.
+- Repository directory: `training-booking-api`.
+- Maven coordinates: `dev.bartmilo:training-booking-api`.
+- Java base package: `dev.bartmilo.trainingbooking`.
 
 ### Local PostgreSQL
 
@@ -44,14 +44,14 @@ docker compose up -d --wait postgres
 docker compose ps
 ```
 
-The database is `boxing_academy`, the default user is `boxing_academy`, and the host address is `127.0.0.1:5432`. `.env` can override the name, user and host port. The password remains local. These initialization credentials configure a new database volume; editing `.env` does not change the password of an existing database user.
+The database is `training_booking`, the default user is `training_booking`, and the host address is `127.0.0.1:5432`. `.env` can override the name, user and host port. The password remains local. These initialization credentials configure a new database volume; editing `.env` does not change the password of an existing database user.
 
 Compose runs PostgreSQL 18.6 with a readiness check and a named volume mounted at `/var/lib/postgresql`, as required by the PostgreSQL 18 image. The published port is bound to loopback. `docker compose down` removes the container/network while preserving the named volume.
 
 To open SQL using the default database/user inside the running container:
 
 ```sh
-docker compose exec postgres psql -U boxing_academy -d boxing_academy
+docker compose exec postgres psql -U training_booking -d training_booking
 ```
 
 ### Run the application against local PostgreSQL
@@ -74,7 +74,7 @@ The `local` profile loads `application-local.properties`. Compose reads `.env` a
 
 The JDBC URL uses the published host port from `POSTGRES_PORT` (default `5432`), the database name from `POSTGRES_DB`, and credentials from the local configuration. The HTTP server binds to `127.0.0.1:8080` in this profile. This host port is independent of the PostgreSQL port. No password is stored in source files.
 
-Verified locally: HTTP 200 with health `UP`, a real Hikari/JDBC connection in application logs, and PostgreSQL sessions reported under `PostgreSQL JDBC Driver`. Flyway created its history table; no versioned migration or business table exists yet.
+Verified locally: HTTP 200 with health `UP`, a real Hikari/JDBC connection in application logs, and PostgreSQL sessions reported under `PostgreSQL JDBC Driver`. Flyway validated the already-applied V1 migration and the existing room table. The rename preserved both room data and migration history.
 
 ### Build and tests
 
@@ -90,7 +90,7 @@ The first run downloads Maven and dependencies. Tests require a running Docker e
 ./mvnw test
 ```
 
-The generated smoke test starts the application context against a disposable PostgreSQL container. It has not yet been executed locally because Docker was not running when the scaffold was created.
+The smoke test starts the application context against a disposable PostgreSQL 18.6 container and applies Flyway migrations. It passed locally after the project rename (1 test, no failures or errors).
 
 With Docker running, the generated development launcher can also supply a disposable database:
 
@@ -100,8 +100,29 @@ With Docker running, the generated development launcher can also supply a dispos
 
 This launch command is provided for the next local verification and has not yet been verified. Container data is temporary. A regular `spring-boot:run` needs database configuration, such as `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME` and `SPRING_DATASOURCE_PASSWORD`. The `local` profile supplies the Compose database configuration as described above; an unprofiled launch can use external `SPRING_DATASOURCE_*` settings.
 
-Spring Security currently uses framework defaults, including a generated development password. Club accounts, session endpoints and business endpoints do not exist yet. Only the Actuator health endpoint is configured for management exposure.
+Spring Security currently uses framework authentication defaults, including a generated development password. Method authorization protects the room API; writes require OWNER. Real club accounts and session endpoints do not exist yet. Only the Actuator health endpoint is configured for management exposure.
 
-Flyway owns the schema. Future SQL migrations belong in `src/main/resources/db/migration`, for example `V1__create_accounts.sql`. Hibernate uses `ddl-auto=validate`, Open Session in View is disabled, and separate `schema.sql`/`data.sql` initialization is disabled. No business tables or placeholder migrations have been generated.
+Flyway owns the schema. Future SQL migrations belong in `src/main/resources/db/migration`, for example `V1__create_accounts.sql`. Hibernate uses `ddl-auto=validate`, Open Session in View is disabled, and separate `schema.sql`/`data.sql` initialization is disabled. The first versioned migration creates room with a UUID primary key; other business tables are not implemented yet.
+
+## Implemented room API
+
+| Method and path | Behavior |
+|---|---|
+| GET `/api/v1/rooms` | Authenticated; active rooms, paginated with page/size (default 0/20, maximum size 100), ordered by name then ID. OWNER can set includeInactive=true. |
+| GET `/api/v1/rooms/{id}` | Authenticated; inactive rooms are visible only to OWNER. |
+| POST `/api/v1/rooms` | OWNER and CSRF; name/capacity and optional active flag, default true. Returns 201, UUID DTO and Location. |
+| PATCH `/api/v1/rooms/{id}` | OWNER and CSRF; optional name/active only. Capacity is immutable. |
+
+The API trims names, rejects invalid/unknown fields and fractional capacity, reports a duplicate name as 409, and returns ProblemDetail for room validation and business errors. Entities are never serialized directly. UUIDs for JPA inserts are generated by Hibernate; the PostgreSQL default remains available for direct SQL inserts.
+
+After restarting the application with the local profile, try a read:
+
+```sh
+curl --user user --header 'Accept: application/json' http://127.0.0.1:8080/api/v1/rooms
+```
+
+Curl prompts for Spring Security's generated development password from the application startup log. This is not POSTGRES_PASSWORD. The default user can read rooms but has no OWNER role. Write routes are exercised by integration tests with simulated OWNER identities until real club identity/bootstrap is implemented. These role tests do not prove the planned session login flow; filter-level security responses still use framework defaults.
+
+`./mvnw -B verify` passes 30 tests, including PostgreSQL constraints, UUID mapping, room HTTP behavior, role checks and CSRF rejection. All test data is in disposable Testcontainers databases. The next implementation slice is database-backed accounts, owner bootstrap and the session/CSRF flow needed to use owner writes interactively.
 
 Implementation agents should start with [AGENTS.md](AGENTS.md). Keep planned behavior separate from implemented and tested capabilities when updating this README.

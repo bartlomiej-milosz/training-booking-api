@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dev.bartmilo</groupId>
-	<artifactId>boxing-academy-api</artifactId>
+	<artifactId>training-booking-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>boxing-academy</name>
-	<description>Backend API for a single boxing academy</description>
+	<name>Training Booking API</name>
+	<description>Backend API for managing training sessions, bookings and entry-based passes for a single club</description>
 	<properties>
 		<java.version>25</java.version>
 	</properties>

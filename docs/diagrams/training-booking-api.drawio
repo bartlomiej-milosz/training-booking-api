@@ -1,4 +1,4 @@
-<mxfile host="Electron" pages="4">
+<mxfile host="Electron" pages="3">
   <diagram name="diagram" id="ncd9caLHSEICZz9X4NYb">
     <mxGraphModel dx="2657" dy="1491" grid="0" gridSize="5" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -2004,32 +2004,6 @@
         </mxCell>
         <mxCell id="simplified-note" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=14;fontColor=#0F172A;fillColor=none;strokeColor=none;strokeWidth=2;spacing=12;fontColor=#64748B;align=left;spacing=0;" value="Conceptual view: Docker Desktop VM/proxy internals are omitted. The source address/port seen by PostgreSQL may be translated." vertex="1">
           <mxGeometry height="25" width="1500" x="50" y="1470" as="geometry" />
-        </mxCell>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram id="EJsvYApdCwMOTdXbS8uH" name="sketch">
-    <mxGraphModel dx="1488" dy="835" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-2" parent="1" style="whiteSpace=wrap;html=1;fillColor=none;align=left;verticalAlign=top;spacing=10;fontFamily=JetBrains Mono;" value="&lt;b&gt;MAC BOOK&lt;/b&gt;" vertex="1">
-          <mxGeometry height="300" width="360" x="170" y="130" as="geometry" />
-        </mxCell>
-        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-1" parent="1" style="whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=10;fontStyle=1;fontFamily=JetBrains Mono;" value="DOCKER" vertex="1">
-          <mxGeometry height="110" width="180" x="260" y="190" as="geometry" />
-        </mxCell>
-        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-3" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="" vertex="1">
-          <mxGeometry height="94" width="15" x="343" y="236" as="geometry" />
-        </mxCell>
-        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-4" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=JetBrains Mono;" value="&lt;pre dir=&quot;ltr&quot;&gt;&lt;code&gt;127.0.0.1:5433&lt;/code&gt;&lt;/pre&gt;" vertex="1">
-          <mxGeometry height="30" width="60" x="320" y="330" as="geometry" />
-        </mxCell>
-        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;fontFamily=JetBrains Mono;" value="?:5432" vertex="1">
-          <mxGeometry height="30" width="60" x="320" y="230" as="geometry" />
-        </mxCell>
-        <mxCell id="MvUZ_Ovrne8n3rQ82ixn-6" parent="1" style="whiteSpace=wrap;html=1;fontStyle=1;fontFamily=JetBrains Mono;fillColor=#ffe6cc;strokeColor=#d79b00;" value="POSTGRES" vertex="1">
-          <mxGeometry height="37" width="68" x="320" y="199" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

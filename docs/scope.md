@@ -2,7 +2,7 @@
 
 ## Objective
 
-Spring Boot Boxing Academy API is a backend for one boxing club. A member can view classes, purchase an entry-limited pass, have a payment recorded by reception/the owner, book and cancel a place, and inspect their pass balance and attendance history. Owners manage the club catalog and schedule. Trainers see their own class rosters and record attendance.
+Training Booking API is a backend for one training club. A member can view classes, purchase an entry-limited pass, have a payment recorded by reception/the owner, book and cancel a place, and inspect their pass balance and attendance history. Owners manage the club catalog and schedule. Trainers see their own class rosters and record attendance.
 
 The distinction between a finished portfolio backend and a live commercial product is intentional. V1 can support a future UI for the workflows below. Public self-service onboarding, real money processing, operational support and legal processes are not claimed to be complete.
 

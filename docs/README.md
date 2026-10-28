@@ -19,7 +19,7 @@ For a quick overview, read scope and architecture. Before implementing a feature
 ## Current diagrams
 
 - [ER overview](diagrams/schema.mmd): Mermaid source for V1 relationships.
-- [Editable database diagram](diagrams/boxing-academy.drawio): open with diagrams.net.
+- [Editable database diagram](diagrams/training-booking-api.drawio): open with diagrams.net.
 
 Column definitions and constraints in database.md take precedence over visual shorthand. Diagram structure has been checked mechanically; no visual rendering verification is claimed.
 
@@ -28,6 +28,7 @@ Column definitions and constraints in database.md take precedence over visual sh
 - [Delivery plan](development/delivery-plan.md): incremental implementation slices and a starting prompt.
 - [Progress](development/progress.md): completed work, actual checks, limitations and next task.
 - [Agent instructions](../AGENTS.md): collaboration and implementation rules.
+- [Code-driven learning notes](../todo.md): optional questions and a walkthrough of the implemented room flow.
 
 These files coordinate implementation; they are not additional product requirements. Keep progress.md concise instead of copying full chat transcripts or command logs into the repository.
 

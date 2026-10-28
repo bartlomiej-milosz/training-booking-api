@@ -16,15 +16,15 @@
 | Packaging | One application image, PostgreSQL image, Docker Compose. |
 | CI | GitHub Actions: build, tests including integration tests, format check. |
 
-At scaffolding, verify the exact patch versions and compatibility in official documentation, pin them and record them in [development/progress.md](development/progress.md). Do not infer a JUnit major from old tutorials, override Boot-managed Hibernate arbitrarily, or use floating `latest` image tags. Use the same PostgreSQL major in Compose and Testcontainers. No application has yet been compiled against this proposed stack.
+At scaffolding, verify the exact patch versions and compatibility in official documentation, pin them and record them in [development/progress.md](development/progress.md). Do not infer a JUnit major from old tutorials, override Boot-managed Hibernate arbitrarily, or use floating `latest` image tags. Use the same PostgreSQL major in Compose and Testcontainers. The selected stack compiles and its implemented room slice passes PostgreSQL-backed tests; see progress.md for actual evidence.
 
 ## One modular monolith
 
 One Maven module, one Spring application, one database. Feature packages provide understandable boundaries without a plugin framework or separate deployments.
 
 ```text
-src/main/java/dev/bartmilo/boxingacademy/
-  BoxingAcademyApplication.java
+src/main/java/dev/bartmilo/trainingbooking/
+  TrainingBookingApplication.java
   identity/       # Users, profiles, authentication and authorization support
   schedule/       # Rooms, groups, sessions and schedule reads
   membership/     # Plans, purchased passes, validity and snapshots
